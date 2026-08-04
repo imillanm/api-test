@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: API con Errores de Ejemplo
+  version: "1.0.0"
+  description: >
+    Esta API contiene errores intencionales de validación y estructura 
+    para pruebas, pero es legible por el visor.
+servers:
+  - url: https://api.ejemplo.com/v1
+paths:
+  /recursoFalla:
+    get:
+      summary: Recurso con error de tipo
+      description: Este endpoint tiene un parámetro con un tipo de dato inválido intencionalmente.
+      parameters:
+        - name: idLimite
+          in: query
+          required: true
+          # ERROR INTENCIONAL: 'tipoInvalido' no es un tipo de OpenAPI válido (debería ser integer/string)
+          schema:
+            type: tipoInvalido 
+      responses:
+        '200':
+          description: Respuesta exitosa simulada
+  /recursoSinRespuestas:
+    post:
+      summary: Recurso sin respuestas definidas
+      description: Este endpoint incumple la regla de tener al menos una respuesta.
+      # ERROR INTENCIONAL: Falta la sección 'responses' obligatoria en OpenAPI
